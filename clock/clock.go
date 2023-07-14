@@ -1,10 +1,11 @@
 package clock
 
 import (
+	"fmt"
 	"fyne.io/fyne/v2"
 	"fyne.io/fyne/v2/widget"
+	"go-fyne-tool/common"
 	"time"
-	"tool/common"
 )
 
 const (
@@ -14,6 +15,8 @@ const (
 	WindowLabelDefaultContent = ""
 )
 
+var windowInfo = common.WindowConfig{}
+
 func flushTime(label *widget.Label) {
 	formatted := time.Now().Format("Time: 03:04:05")
 	label.SetText(formatted)
@@ -21,11 +24,8 @@ func flushTime(label *widget.Label) {
 
 func Show(app fyne.App) {
 
-	var windowInfo = common.WindowConfig{
-		Close: make(chan bool),
-	}
-
 	if windowInfo.Show == false {
+		windowInfo.Close = make(chan bool)
 		window := app.NewWindow(WindowTitle)
 		label := widget.NewLabel(WindowLabelDefaultContent)
 		window.SetContent(label)
@@ -37,6 +37,7 @@ func Show(app fyne.App) {
 				case <-windowInfo.Close:
 					return
 				default:
+					fmt.Print("flush")
 					flushTime(label)
 				}
 			}

@@ -5,8 +5,8 @@ import (
 	"fyne.io/fyne/v2/app"
 	"fyne.io/fyne/v2/container"
 	"fyne.io/fyne/v2/widget"
-	"tool/clock"
-	"tool/systemInformation"
+	"go-fyne-tool/clock"
+	"go-fyne-tool/systemInformation"
 )
 
 type buttonInfo struct {
